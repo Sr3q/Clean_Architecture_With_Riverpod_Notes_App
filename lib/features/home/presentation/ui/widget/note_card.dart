@@ -1,5 +1,6 @@
 import 'package:clean_note_app/common/models/note_model.dart';
 import 'package:clean_note_app/common/style/decorations/text_field_decoration.dart';
+import 'package:clean_note_app/features/delete_update_note/presentation/ui/update_delete_screen.dart';
 import 'package:flutter/material.dart';
 
 class NoteCard extends StatelessWidget {
@@ -13,16 +14,16 @@ class NoteCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        // showDialog(
-        //   useSafeArea: true,
-        //   context: context,
-        //   builder: (context) => Dialog(
-        //     backgroundColor: Colors.transparent,
-        //     alignment: Alignment.center,
-        //     insetPadding: EdgeInsets.zero,
-        //     child: UpdateDeleteNoteCard(note: note),
-        //   ),
-        // );
+        showDialog(
+          useSafeArea: true,
+          context: context,
+          builder: (context) => Dialog(
+            backgroundColor: Colors.transparent,
+            alignment: Alignment.center,
+            insetPadding: EdgeInsets.zero,
+            child: UpdateDeleteScreen(note: note),
+          ),
+        );
       },
       child: Card(
         shape: RoundedRectangleBorder(

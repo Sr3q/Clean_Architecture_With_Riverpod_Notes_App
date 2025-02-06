@@ -40,4 +40,19 @@ class GetNotesProvider extends AutoDisposeNotifier<GetNotesState> {
 
     state = state.copyWith(notes: newNotes);
   }
+
+  void deleteNote(int noteId) {
+    final newNotes = state.notes.where((n) => n.id != noteId).toList();
+
+    state = state.copyWith(notes: newNotes);
+  }
+
+  void updateNote(NoteModel note) {
+    List<NoteModel> newNotes =
+        state.notes.where((n) => n.id != note.id).toList();
+
+    newNotes = [note, ...newNotes];
+
+    state = state.copyWith(notes: newNotes);
+  }
 }

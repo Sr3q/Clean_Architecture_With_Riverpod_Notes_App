@@ -50,7 +50,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               return ListView(
                 children: [
                   ...notesProvider.notes.map((note) => NoteCard(
-                        key: ValueKey(note.id),
+                        key: UniqueKey(),
                         note: note,
                       )),
                   const SizedBox(height: 50),
