@@ -2,6 +2,7 @@ import 'package:clean_note_app/core/route/route_name.dart';
 import 'package:clean_note_app/features/auth/common_auth/presentation/provider/auth_provider.dart';
 import 'package:clean_note_app/features/auth/common_auth/presentation/ui/auth_screen.dart';
 import 'package:clean_note_app/features/home/presentation/ui/home_screen.dart';
+import 'package:clean_note_app/features/search/presentation/ui/search_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,6 +33,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: '/home',
         name: homeRoute,
         builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: '/search',
+        name: searchRoute,
+        builder: (context, state) => const SearchScreen(),
       ),
     ],
   );

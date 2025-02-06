@@ -1,4 +1,7 @@
+import 'package:clean_note_app/core/route/route_name.dart';
+import 'package:clean_note_app/features/auth/logout/presentation/ui/widget/logout_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -8,13 +11,7 @@ class HomeAppBar extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return AppBar(
-      leading: IconButton(
-        icon: const Icon(
-          Icons.logout,
-          color: Colors.black,
-        ),
-        onPressed: () async {},
-      ),
+      leading: LogoutButton(),
       title: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -34,8 +31,7 @@ class HomeAppBar extends StatelessWidget {
       actions: [
         IconButton(
             onPressed: () {
-              // navigator(const SearchScreen(), context);
-              // notesProvider.getToken();
+              context.pushNamed(searchRoute);
             },
             icon: const Icon(
               Icons.search,
