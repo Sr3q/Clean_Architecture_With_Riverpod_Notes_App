@@ -1,4 +1,6 @@
+import 'package:clean_note_app/features/create_note/presentation/ui/create_note_screen.dart';
 import 'package:clean_note_app/features/home/presentation/provider/get_notes_provider.dart';
+import 'package:clean_note_app/features/home/presentation/ui/widget/home_app_bar.dart';
 import 'package:clean_note_app/features/home/presentation/ui/widget/note_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,52 +17,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    
+
     Future.microtask(() => ref.read(getNotesProvider.notifier).getNotes());
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.logout,
-            color: Colors.black,
-          ),
-          onPressed: () async {},
-        ),
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              'assets/images/logo.png',
-              height: size.height * 0.08,
-              width: size.width * 0.2,
-            ),
-            // SizedBox(width: size.width * 0.02),
-            Text(
-              'نوتسي',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(fontSize: 40),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                // navigator(const SearchScreen(), context);
-                // notesProvider.getToken();
-              },
-              icon: const Icon(
-                Icons.search,
-                color: Colors.black,
-              ))
-        ],
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: HomeAppBar(),
       ),
       body: Center(
         child: Consumer(
@@ -81,17 +47,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 );
               }
-              return ListView.builder(
-                itemCount: notesProvider.notes.length + 1,
-                itemBuilder: (context, index) {
-                  if (index != notesProvider.notes.length) {
-                    return NoteCard(
-                      note: notesProvider.notes[index],
-                    );
-                  } else {
-                    return const SizedBox(height: 50);
-                  }
-                },
+              return ListView(
+                children: [
+                  ...notesProvider.notes.map((note) => NoteCard(
+                        key: ValueKey(note.id),
+                        note: note,
+                      )),
+                  const SizedBox(height: 50),
+                ],
               );
             } else if (notesProvider.errorMessage != null) {
               return Text(
@@ -116,16 +79,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // showDialog(
-          //   useSafeArea: true,
-          //   context: context,
-          //   builder: (context) => const Dialog(
-          //     backgroundColor: Colors.transparent,
-          //     alignment: Alignment.center,
-          //     insetPadding: EdgeInsets.zero,
-          //     child: CreateNoteCard(),
-          //   ),
-          // );
+          showDialog(
+            useSafeArea: true,
+            context: context,
+            builder: (context) => const Dialog(
+              backgroundColor: Colors.transparent,
+              alignment: Alignment.center,
+              insetPadding: EdgeInsets.zero,
+              child: CreateNoteScreen(),
+            ),
+          );
         },
         backgroundColor: Colors.black,
         child: const Icon(

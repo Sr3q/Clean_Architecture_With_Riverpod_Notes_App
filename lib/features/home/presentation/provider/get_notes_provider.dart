@@ -1,3 +1,4 @@
+import 'package:clean_note_app/common/models/note_model.dart';
 import 'package:clean_note_app/features/home/application/services/get_notes_service.dart';
 import 'package:clean_note_app/features/home/presentation/state/get_notes_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,5 +33,11 @@ class GetNotesProvider extends AutoDisposeNotifier<GetNotesState> {
     } catch (e) {
       state = state.copyWith(isLoading: false, errorMessage: e.toString());
     }
+  }
+
+  void addNote(NoteModel note) {
+    final newNotes = [note, ...state.notes];
+
+    state = state.copyWith(notes: newNotes);
   }
 }

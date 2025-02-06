@@ -1,5 +1,5 @@
+import 'package:clean_note_app/common/models/note_model.dart';
 import 'package:clean_note_app/common/style/decorations/text_field_decoration.dart';
-import 'package:clean_note_app/features/home/application/models/note_model.dart';
 import 'package:flutter/material.dart';
 
 class NoteCard extends StatelessWidget {

@@ -1,7 +1,9 @@
+import 'package:clean_note_app/common/models/note_model.dart';
+
 class CreateNoteResponse {
   final bool status;
   final String message;
-  final Note note;
+  final NoteModel note;
 
   CreateNoteResponse({
     required this.status,
@@ -13,33 +15,7 @@ class CreateNoteResponse {
     return CreateNoteResponse(
       status: json['status'],
       message: json['msg'],
-      note: Note.fromJson(json['note']),
-    );
-  }
-}
-
-class Note {
-  final int id;
-  final String title;
-  final String content;
-  final String createdAt;
-  final String updatedAt;
-
-  Note({
-    required this.id,
-    required this.title,
-    required this.content,
-    required this.createdAt,
-    required this.updatedAt,
-  });
-
-  factory Note.fromJson(Map<String, dynamic> json) {
-    return Note(
-      id: json['id'],
-      title: json['title'],
-      content: json['content'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      note: NoteModel.fromJson(json['note']),
     );
   }
 }

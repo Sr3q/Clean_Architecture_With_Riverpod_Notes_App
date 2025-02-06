@@ -25,13 +25,6 @@ class Validations {
     return null;
   }
 
-  //  static String? validateConfirmPassword(String? value) {
-  //   if (value != AuthProvider) {
-  //     return 'الرجاء إدخال كلمة المرور';
-  //   }
-  //   return null;
-  // }
-
   static String? validateUsername(String? value) {
     if (value == null || value.isEmpty) {
       return 'الرجاء إدخال اسم المستخدم';
@@ -39,6 +32,13 @@ class Validations {
     final RegExp nameExp = RegExp(r'^[a-zA-Z][a-zA-Z0-9._]{0,29}$');
     if (!nameExp.hasMatch(value)) {
       return 'احرف انجليزية وارقام ونقط و _ ويبدأ بحرف';
+    }
+    return null;
+  }
+
+  static String? validatetemplate(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'لايمكن ان يكون فارغ';
     }
     return null;
   }

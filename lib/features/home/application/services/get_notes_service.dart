@@ -1,7 +1,6 @@
 import 'package:clean_note_app/common/exception/failure.dart';
-import 'package:clean_note_app/features/home/application/models/note_model.dart';
+import 'package:clean_note_app/common/models/note_model.dart';
 import 'package:clean_note_app/features/home/application/services/iget_notes_service.dart';
-import 'package:clean_note_app/features/home/data/dto/response/get_notes_respnse.dart';
 import 'package:clean_note_app/features/home/data/repository/get_notes_repository.dart';
 import 'package:clean_note_app/features/home/data/repository/iget_notes_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,9 +22,7 @@ final class GetNotesService implements IGetNotesService {
     try {
       final response = await _repository.getNotes();
 
-      final notes = mapNotesResponseToNoteModel(response);
-
-      return Success(notes);
+      return Success(response.notes);
     } on Failure catch (e) {
       return Error(e);
     } catch (e, s) {
@@ -37,19 +34,5 @@ final class GetNotesService implements IGetNotesService {
         ),
       );
     }
-  }
-
-  List<NoteModel> mapNotesResponseToNoteModel(GetNotesRespnse response) {
-    return response.notes
-        .map(
-          (x) => NoteModel(
-            id: x.id,
-            title: x.title,
-            content: x.content,
-            createdAt: x.createdAt,
-            updatedAt: x.updatedAt,
-          ),
-        )
-        .toList();
   }
 }

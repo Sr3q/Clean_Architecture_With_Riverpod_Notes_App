@@ -1,29 +1,27 @@
-import 'package:clean_note_app/common/models/note_model.dart';
-
-class GetNotesState {
-  final List<NoteModel> notes;
+class CreateNoteState {
   final bool isLoading;
   final bool isSuccess;
   final String? errorMessage;
-  
-  GetNotesState({
-    this.notes = const [],
+  final Map<String, dynamic> noteForm;
+
+  CreateNoteState({
     this.isLoading = false,
     this.isSuccess = false,
     this.errorMessage,
+    this.noteForm=const {},
   });
 
-  GetNotesState copyWith({
-    List<NoteModel>? notes,
+  CreateNoteState copyWith({
     bool? isLoading,
     bool? isSuccess,
     String? errorMessage,
+    Map<String, dynamic>? noteForm,
   }) {
-    return GetNotesState(
-      notes: notes ?? this.notes,
+    return CreateNoteState(
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,
       errorMessage: errorMessage,
+      noteForm: noteForm ?? this.noteForm,
     );
   }
 }

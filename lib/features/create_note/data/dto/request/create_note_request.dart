@@ -7,7 +7,14 @@ class CreateNoteRequest {
   Map<String, dynamic> tojson() {
     return {
       'title': title,
-      'note_Content': noteContent,
+      'note_content': noteContent,
     };
+  }
+
+  factory CreateNoteRequest.fromJson(Map<String, dynamic> json) {
+    return CreateNoteRequest(
+      title: json['title'],
+      noteContent: json['note_content'],
+    );
   }
 }
