@@ -8,19 +8,18 @@ import 'package:go_router/go_router.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authProvider).isAuthuthenticated;
+  final isEmailVerified = ref.watch(authProvider).user?.emailVerifiedAt != null;
 
   return GoRouter(
     initialLocation: '/auth',
     redirect: (context, state) {
-     
-      final isGoingToLogin = state.matchedLocation == '/auth';
 
-      if (authState) {
-        if (isGoingToLogin) {
-          return '/home';
-        }
+      final isGoingToAuth = state.matchedLocation == '/auth';
+
+      if (authState && isEmailVerified && isGoingToAuth) {
+        return '/home';
       }
-      
+
       return null;
     },
     routes: [

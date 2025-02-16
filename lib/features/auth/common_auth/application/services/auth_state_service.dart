@@ -1,3 +1,4 @@
+import 'package:clean_note_app/common/exception/failure.dart';
 import 'package:clean_note_app/features/auth/common_auth/application/model/user_model.dart';
 import 'package:clean_note_app/features/auth/common_auth/application/services/iauth_state_service.dart';
 import 'package:clean_note_app/features/auth/common_auth/data/repository/auth_state_repository.dart';
@@ -46,5 +47,14 @@ final class AuthStateService implements IauthStateService {
   @override
   Future<String?> getToken() async {
     return await _authStateRepository.getToken();
+  }
+
+  @override
+  Future<bool> checkToken() async {
+    try {
+      return await _authStateRepository.checkToken();
+    } catch (e) {
+      return false;
+    }
   }
 }

@@ -5,4 +5,5 @@ abstract interface class IauthStateService {
   Future<bool> removeAuthState();
   UserModel? getAuthState();
   Future<String?> getToken();
+  Future<bool> checkToken();
 }

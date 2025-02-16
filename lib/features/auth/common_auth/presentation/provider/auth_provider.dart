@@ -12,11 +12,17 @@ class AuthProvider extends Notifier<AuthState> {
     return AuthState();
   }
 
-  void getAuthState() {
+  Future<void> getAuthState() async {
     final user = ref.read(authStateServiceProvider).getAuthState();
 
     if (user != null) {
-      state = state.copyWith(isAuthuthenticated: true, user: user);
+      final result = await ref.read(authStateServiceProvider).checkToken();
+
+      if (result) {
+        state = state.copyWith(isAuthuthenticated: true, user: user);
+      } else {
+        removeAuthState();
+      }
     }
   }
 
